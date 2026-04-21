@@ -1,19 +1,27 @@
-import csv
-import io
-from datetime import datetime
+# 1. 표준 라이브러리 및 파일 처리
+import csv      # 사실: CSV 파일을 읽고 쓰기 위한 표준 모듈
+import io       # 사실: 메모리 내에서 파일처럼 다룰 수 있는 버퍼(Stream) 객체 제공
+from datetime import datetime # 사실: 날짜와 시간을 조작하기 위한 모듈
 
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.http import require_GET, require_POST
+# 2. Django 프레임워크 관련
+from django.contrib.auth.decorators import login_required # 함수: 로그인 여부를 확인하는 데코레이터
+from django.http import HttpResponse, JsonResponse         # 클래스: 각각 일반/파일 응답과 JSON 응답을 처리
+from django.views.decorators.http import require_GET, require_POST # 데코레이터: 특정 HTTP 메서드만 허용하도록 제한
 
-from openpyxl import Workbook, load_workbook
-from openpyxl.styles import Alignment, Font, PatternFill
-from openpyxl.worksheet.datavalidation import DataValidation
-from openpyxl.formatting.rule import FormulaRule
-from openpyxl.utils import get_column_letter
+# 3. Excel 조작 관련 (openpyxl)
+# 이 부분은 엑셀 시트의 디자인과 기능적 제약을 설정하는 도구들입니다
+from openpyxl import Workbook, load_workbook # 클래스: 새 엑셀 생성 및 기존 파일 로드
+from openpyxl.styles import Alignment, Font, PatternFill # 클래스: 정렬, 글꼴, 배경색 지정
+from openpyxl.worksheet.datavalidation import DataValidation # 클래스: 엑셀 내 드롭다운(선택창) 등 입력 제한 설정
+from openpyxl.formatting.rule import FormulaRule # 클래스: 조건부 서식(특정 조건 시 색 변경 등) 적용
+from openpyxl.utils import get_column_letter # 함수: 숫자(1, 2)를 엑셀 열 문자(A, B)로 변환
 
-from ...models import *
-from ...permissions import _check_page_permission
+# 4. 프로젝트 내부 모듈 (상대 경로 임포트)
+# 여기서 점(...)의 개수는 상위 폴더로 이동하는 단계를 의미합니다.
+from ...models import * # 객체: 두 단계 상위 폴더의 모든 DB 모델 클래스
+from ...permissions import _check_page_permission # 함수: 페이지 접근 권한을 확인하는 로직
+
+# ..common: 한 단계 상위 폴더의 common.py에서 앞서 우리가 살펴본 유틸리티 함수들을 가져옴
 from ..common import (
     _ensure_browser_close_session,
     _get_actor,
@@ -22,7 +30,12 @@ from ..common import (
     _plan_to_json,
     _tip_missing_to_json,
 )
+
+# .helpers: 현재 파일과 같은 폴더에 있는 helpers.py에서 특정 검증 함수를 가져옴
 from .helpers import _is_invalid_single_cham_value
+
+
+
 
 @require_POST
 @login_required
@@ -272,13 +285,36 @@ def dashboard_bulk_upload_api(request):
         ),
     })
 
-@require_GET
-@login_required
-def dashboard_upload_template(request):
-    _ensure_browser_close_session(request)
-    permission_response = _check_page_permission(request, "dashboard", ignore_blank_scope=True)
+
+
+# 이 코드는 사용자가 업로드한 CSV 또는 엑셀(XLSX) 파일을 읽어서 시스템의 기준 정보(호환계획 및 TIP 미등록 경로)를 **일괄 업데이트(Bulk Upload)**하는 핵심 로직입니다.
+# 중복 데이터 처리, 데이터 정규화, 그리고 변경 이력(History) 기록까지 포함된 상당히 정교한 비즈니스 로직입니다. 단계별로 주석을 달아 분석해 드립니다.
+@require_POST      # 데코레이터: POST 요청만 허용
+@login_required    # 데코레이터: 로그인한 사용자만 접근 가능
+def dashboard_bulk_upload_api(request):
+    _ensure_browser_close_session(request) # 보안: 브라우저 종료 시 세션 만료 설정
+    
+   # 요청(request) 객체에서 파일 및 파라미터 정보 추출
+    upload = request.FILES.get("file")  # 업로드된 파일 객체
+    snap_date_str = request.POST.get("snap_date")  # 기준일(Snapshot Date) 문자열
+    lineid = (request.POST.get("lineid") or "").strip()  # 라인 ID (공백 제거)
+    # 공정 ID 추출 (processid 또는 prp_processid 중 있는 값 사용)
+    processid = (request.POST.get("processid") or request.POST.get("prp_processid") or "").strip()
+    actor = _get_actor(request)  # 현재 작업을 수행 중인 사용자 객체 가져오기
+
+    # 페이지 접근 권한 및 편집 권한(require_edit=True) 체크
+    permission_response = _check_page_permission(request, "dashboard", lineid=lineid, processid=processid, require_edit=True, popup=True)
     if permission_response is not None:
+        # 권한이 없으면 설정된 권한 에러 응답 반환
         return permission_response
+
+    # 필수 입력값(파일, 기준일) 누락 시 400 에러 반환
+    if not upload or not snap_date_str:
+        return JsonResponse({"ok": False, "message": "파일과 기준일이 필요합니다."}, status=400)
+
+    # 필수 입력값(라인 ID) 누락 시 400 에러 반환
+    if not lineid:
+        return JsonResponse({"ok": False, "message": "LINE 선택값이 필요합니다."}, status=400)
 
     wb = Workbook()
     ws = wb.active
