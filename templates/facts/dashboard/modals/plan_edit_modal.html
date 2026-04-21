@@ -1,0 +1,61 @@
+{# 역할: 호환계획 신규/수정 입력 폼 모달.
+   planSaveBtn 클릭 시 JS가 API payload를 만들어 저장합니다. #}
+<div id="planEditModal" class="modal hidden">
+    <div class="modal-panel plan-edit-modal-panel">
+        <div class="modal-title">호환 계획 입력</div>
+        <div class="modal-body">
+            <input type="hidden" id="planEditId">
+            <div class="filter-grid plan-edit-grid">
+                <div>
+                    <label>상시/비상시</label>
+                    <select id="planAlwaysEmergency">
+                        <option value="">선택</option>
+                        <option value="상시">상시</option>
+                        <option value="비상시">비상시</option>
+                    </select>
+                </div>
+                <div>
+                    <label>주요/비주요</label>
+                    <select id="planMajorMinor">
+                        <option value="">선택</option>
+                        <option value="주요">주요</option>
+                        <option value="비주요">비주요</option>
+                    </select>
+                </div>
+                <div>
+                    <label>호환EQPBODY명 (필수기재)</label>
+                    <input type="text" id="planEqpBodyName">
+                </div>
+                <div>
+                    <label>호환EQPCHAM명</label>
+                    <input type="text" id="planEqpChamName">
+                </div>
+                <div>
+                    <label>호환완료계획일</label>
+                    <input type="date" id="planDueDate">
+                </div>
+                <div>
+                    <label>평가LotID</label>
+                    <input type="text" id="planEvalLotId">
+                </div>
+                <div>
+                    <label>평가단계</label>
+                    <select id="planEvalStage">
+                        <option value="">선택</option>
+                        {% for s in eval_stages %}
+                            <option value="{{ s.id }}">{{ s.stage_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label>비고</label>
+                    <input type="text" id="planMemo">
+                </div>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="planCancelBtn">취소</button>
+            <button type="button" class="btn-primary" id="planSaveBtn">저장</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+{# 역할: PRP TABLE 전체 영역.
+   상단 툴바, 상세 필터, 결과 테이블을 한 섹션으로 묶습니다. #}
+<section class="card prp-box-card">
+    <div class="card-header-row prp-box-header">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <h3 style="margin:0;">PRP TABLE</h3>
+            <span style="font-size:13px; color:#486888;">PRP 조건과 그 외 한개 이상의 필터 조건을 설정 후 조회바랍니다.</span>
+        </div>
+        <div class="toolbar-inline">
+            <button type="button" class="btn-primary btn-sm" id="tblFilterSearchBtn">조회</button>
+            <button type="button" class="btn-secondary btn-sm" id="prpExcelDownloadBtn">필터조건 다운로드</button>
+            <button type="button" class="btn-secondary btn-sm" id="prpExcelDownloadAllBtn">전체 다운로드</button>
+            <button type="button" class="btn-secondary btn-sm" id="openUploadModalBtn">엑셀 업로드</button>
+            <button type="button" class="btn-secondary btn-sm" id="prpScrollTopBtn">맨위로</button>
+            <button type="button" class="btn-secondary btn-sm" id="prpScrollBottomBtn">맨아래로</button>
+        </div>
+    </div>
+
+    {% include "facts/dashboard/sections/prp_filter_grid.html" %}
+    {% include "facts/dashboard/sections/prp_table_wrap.html" %}
+</section>

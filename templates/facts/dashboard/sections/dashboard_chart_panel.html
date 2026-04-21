@@ -1,0 +1,13 @@
+{# 역할: 우측 호환율 그래프 패널.
+   계산 가이드 버튼, canvas, 빈 데이터 메시지를 포함합니다. #}
+<section class="card dashboard-right-panel">
+    <div class="card-header-row">
+        <h3>호환율 그래프</h3>
+        {# 역할: 사용 가이드 모달을 여는 버튼 #}
+        <button type="button" class="info-icon-btn" id="calcInfoBtn" title="사용 가이드">?</button>
+    </div>
+    <div class="chart-wrap dashboard-chart-wrap">
+        <canvas id="factsMainChart"></canvas>
+    </div>
+    <div id="chartEmptyMessage" class="chart-empty-message hidden">그래프 데이터가 없습니다.</div>
+</section>

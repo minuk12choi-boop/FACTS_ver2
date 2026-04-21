@@ -1,0 +1,120 @@
+{# 역할: PRP TABLE 전용 상세 필터 묶음.
+   JS buildPrpQueryString가 각 element id를 기준으로 값을 읽습니다. #}
+<div class="prp-box-filter-grid">
+    <div>
+        <label>기준일</label>
+        <input type="date" id="tblFilterSnapDate" value="{{ snap_date|date:'Y-m-d' }}">
+    </div>
+    <div>
+        <label>LINE</label>
+        <select id="tblFilterLine">
+            <option value="">전체</option>
+            {% for line in table_line_options %}
+                <option value="{{ line }}">{{ line }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label>PRP</label>
+        <select id="tblFilterPrp">
+            <option value="">선택</option>
+            {% for p in table_prp_options %}
+                <option value="{{ p }}">{{ p }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label>AREA</label>
+        <select id="tblFilterArea">
+            <option value="">전체</option>
+            {% for a in table_area_options %}
+                <option value="{{ a }}">{{ a }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label>LAYER</label>
+        <select id="tblFilterLayer">
+            <option value="">전체</option>
+            {% for l in table_layer_options %}
+                <option value="{{ l }}">{{ l }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label>STEP</label>
+        <select id="tblFilterStep">
+            <option value="">전체</option>
+            {% for s in table_step_options %}
+                <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label>DESCRIPT</label>
+        <input type="text" id="tblFilterDescript" placeholder="DESCRIPT 일부 입력">
+    </div>
+    <div>
+        <label>RECIPE</label>
+        <input type="text" id="tblFilterRecipe" placeholder="RECIPE 일부 입력">
+    </div>
+    <div>
+        <label>TYPE</label>
+        <select id="tblFilterType">
+            <option value="">전체</option>
+            {% for t in table_type_options %}
+                <option value="{{ t }}">{{ t }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label>BODY호환</label>
+        <select id="tblFilterBodyFlag">
+            <option value="">전체</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+    <div>
+        <label>CHAM호환</label>
+        <select id="tblFilterChamFlag">
+            <option value="">전체</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+    <div>
+        <label>호환구분</label>
+        <select id="tblFilterCompatType">
+            <option value="">전체</option>
+            <option value="미등록">미등록</option>
+            <option value="단독">단독</option>
+            <option value="cham호환">cham호환</option>
+            <option value="body호환">body호환</option>
+        </select>
+    </div>
+    <div>
+        <label>상시</label>
+        <select id="tblFilterAlways">
+            <option value="">전체</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+    <div>
+        <label>주요</label>
+        <select id="tblFilterMajor">
+            <option value="">전체</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+    <div>
+        <label>계획</label>
+        <select id="tblFilterPlan">
+            <option value="">전체</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+</div>

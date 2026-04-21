@@ -1,0 +1,14 @@
+{# 역할: 상단 대시보드의 전체 form 컨테이너.
+   hidden input, 좌측 필터/요약 패널, 우측 그래프 패널을 묶습니다. #}
+<form method="get" id="dashboardFilterForm">
+    {# 역할: 체크박스 미선택 시에도 0 값이 서버로 전달되도록 하는 hidden input 세트 #}
+    <input type="hidden" name="include_measure" value="0">
+    <input type="hidden" name="include_emergency" value="0">
+    <input type="hidden" name="exclude_skiprule_100" value="0">
+    <input type="hidden" name="tip_mode" value="0">
+
+    <div class="dashboard-grid">
+        {% include "facts/dashboard/sections/dashboard_filter_panel.html" %}
+        {% include "facts/dashboard/sections/dashboard_chart_panel.html" %}
+    </div>
+</form>

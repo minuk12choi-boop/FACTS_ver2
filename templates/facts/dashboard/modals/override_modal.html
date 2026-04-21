@@ -1,0 +1,17 @@
+{# 역할: 상시/비상시 또는 주요/비주요를 member 단위로 수정하는 모달.
+   overrideMemberList는 JS가 동적으로 select 목록을 채웁니다. #}
+<div id="overrideModal" class="modal hidden">
+    <div class="modal-panel">
+        <div class="modal-title" id="overrideModalTitle">값 선택</div>
+        <div class="modal-body">
+            <input type="hidden" id="overrideFieldType">
+            <div id="overrideMemberList" class="override-member-list">
+                <div class="empty-cell">불러오는 중...</div>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="overrideCancelBtn">취소</button>
+            <button type="button" class="btn-primary" id="overrideSaveBtn">저장</button>
+        </div>
+    </div>
+</div>

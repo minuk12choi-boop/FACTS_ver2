@@ -1,0 +1,34 @@
+{# 역할: 대시보드 상단 요약 카드 묶음.
+   JS renderSummary가 각 summary-* element의 텍스트를 갱신합니다. #}
+<div class="summary-grid dashboard-summary-grid">
+    <div class="summary-card">
+        <div class="summary-label">호환율</div>
+        <div class="summary-value" id="summaryCompatRate">{{ summary.compat_rate|floatformat:1 }}%</div>
+    </div>
+    <div class="summary-card">
+        <div class="summary-label">전체 STEP</div>
+        <div class="summary-value" id="summaryTotalSteps">{{ summary.total_steps }}</div>
+    </div>
+    <div class="summary-card">
+        <div class="summary-label">단독</div>
+        <div class="summary-value" id="summarySingleCnt">{{ summary.single_cnt }}</div>
+    </div>
+    <div class="summary-card">
+        <div class="summary-label">BODY호환</div>
+        <div class="summary-value" id="summaryBodyCnt">{{ summary.body_cnt }}</div>
+    </div>
+    <div class="summary-card">
+        <div class="summary-label">CHAM호환</div>
+        <div class="summary-value" id="summaryChamCnt">{{ summary.cham_cnt }}</div>
+    </div>
+    <div class="summary-card">
+        <div class="summary-label">월 목표</div>
+        <div class="summary-value" id="summaryTargetMonthly">
+            {% if target_monthly is not None %}
+                {{ target_monthly|floatformat:1 }}%
+            {% else %}
+                -
+            {% endif %}
+        </div>
+    </div>
+</div>

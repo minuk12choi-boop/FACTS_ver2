@@ -1,0 +1,50 @@
+{# 역할: FACTS 대시보드 페이지의 최상위 조립 템플릿.
+   base.html을 상속하고, 실제 화면 영역은 section/modal/include 단위 partial로 분리해서 불러옵니다. #}
+{% extends "facts/base.html" %}
+
+{% block content %}
+{# 역할: 상단 대시보드 필터 + 요약 카드 + 그래프 영역 #}
+{% include "facts/dashboard/sections/dashboard_form_section.html" %}
+
+{# 역할: PRP TABLE 본문 및 필터/툴바 영역 #}
+{% include "facts/dashboard/sections/prp_table_section.html" %}
+
+{# 역할: 사용 가이드 이미지 뷰어 모달 #}
+{% include "facts/dashboard/modals/guide_modal.html" %}
+
+{# 역할: 상시/비상시, 주요/비주요 개별 설비 단위 수정 모달 #}
+{% include "facts/dashboard/modals/override_modal.html" %}
+
+{# 역할: 호환계획 목록 확인 모달 #}
+{% include "facts/dashboard/modals/plan_list_modal.html" %}
+
+{# 역할: 동종모델 EQP 추천 결과 확인 모달 #}
+{% include "facts/dashboard/modals/similar_eqp_modal.html" %}
+
+{# 역할: 호환계획 신규/수정 입력 모달 #}
+{% include "facts/dashboard/modals/plan_edit_modal.html" %}
+
+{# 역할: TIP미등록 호환Path 목록 확인 모달 #}
+{% include "facts/dashboard/modals/tip_missing_list_modal.html" %}
+
+{# 역할: TIP미등록 호환Path 신규/수정 입력 모달 #}
+{% include "facts/dashboard/modals/tip_missing_edit_modal.html" %}
+
+{# 역할: 엑셀 업로드 모달 #}
+{% include "facts/dashboard/modals/upload_modal.html" %}
+
+{# 역할: 공통 메시지 모달 #}
+{% include "facts/dashboard/modals/message_modal.html" %}
+
+{# 역할: 공통 확인(confirm) 모달 #}
+{% include "facts/dashboard/modals/confirm_modal.html" %}
+
+{# 역할: JS가 읽을 초기 JSON/script 데이터 주입 블록 #}
+{% include "facts/dashboard/includes/dashboard_json_data.html" %}
+{% endblock %}
+
+{% block script %}
+{# 역할: dashboard.js를 기능별 파일로 분리한 경우의 로드 순서.
+   주의: 공용 기반 -> 기능 모듈 -> 최종 bootstrap 순서로 로드해야 합니다. #}
+{% include "facts/dashboard/includes/dashboard_scripts.html" %}
+{% endblock %}

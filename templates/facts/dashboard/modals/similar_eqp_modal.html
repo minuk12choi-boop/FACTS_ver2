@@ -1,0 +1,33 @@
+{# 역할: 동종모델 기반 EQP 추천 결과를 보여주는 모달.
+   기준 EQP/모델 정보와 추천 목록 테이블을 포함합니다. #}
+<div id="similarEqpModal" class="modal hidden">
+    <div class="modal-panel plan-list-modal-panel">
+        <div class="modal-title">동종모델 EQP 리스트</div>
+        <div class="modal-body">
+            <div style="margin-bottom:10px; font-size:13px; color:#d32f2f; font-weight:700;" id="similarEqpNotice">
+                해당 추천은 GPM 등록된 EQP_MODEL을 기준으로 합니다.
+            </div>
+            <div style="margin-bottom:10px; font-size:12px; color:#486888;" id="similarEqpBaseInfo"></div>
+            <div class="table-wrap plan-list-table-wrap">
+                <table class="facts-table compact-facts-table" id="similarEqpTable">
+                    <thead>
+                        <tr>
+                            <th>EQP_ID</th>
+                            <th>위치</th>
+                            <th>EQP_MODEL</th>
+                            <th>매칭기준</th>
+                            <th>유사도</th>
+                            <th>기준모델</th>
+                        </tr>
+                    </thead>
+                    <tbody id="similarEqpTbody">
+                        <tr><td colspan="6" class="empty-cell">불러오는 중...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="similarEqpCloseBtn">닫기</button>
+        </div>
+    </div>
+</div>

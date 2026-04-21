@@ -1,0 +1,37 @@
+{# 역할: 특정 step의 호환계획 목록을 보여주는 모달.
+   목록 조회, 신규 입력, 동종모델 EQP 확인 진입 버튼을 포함합니다. #}
+<div id="planListModal" class="modal hidden">
+    <div class="modal-panel plan-list-modal-panel">
+        <div class="modal-title">호환계획 목록</div>
+        <div class="modal-body">
+            <div class="toolbar-inline" style="margin-bottom:12px;">
+                <button type="button" class="btn-primary btn-sm" id="planAddNewBtn">신규 입력</button>
+                <button type="button" class="btn-secondary btn-sm" id="openSimilarEqpBtn">동종모델 EQP 리스트 확인</button>
+            </div>
+            <div class="table-wrap plan-list-table-wrap">
+                <table class="facts-table compact-facts-table" id="planListTable">
+                    <thead>
+                        <tr>
+                            <th>상시/비상시</th>
+                            <th>주요/비주요</th>
+                            <th>계획_호환EQPBODY명</th>
+                            <th>계획_호환EQPCHAM명</th>
+                            <th>계획_호환완료계획일</th>
+                            <th>계획_평가LotID</th>
+                            <th>계획_평가단계</th>
+                            <th>계획_비고</th>
+                            <th>수정</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planListTbody">
+                        <tr><td colspan="10" class="empty-cell">불러오는 중...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="planListCloseBtn">닫기</button>
+        </div>
+    </div>
+</div>

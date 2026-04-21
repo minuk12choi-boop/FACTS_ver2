@@ -1,0 +1,52 @@
+{# 역할: PRP TABLE 실제 결과 테이블.
+   tbody는 최초엔 안내 문구만 보이고, 조회 후 JS renderTable이 동적 렌더링합니다. #}
+<div class="table-wrap prp-dashboard-table-wrap" id="prpTableWrap">
+    <table class="facts-table facts-cell-table" id="prpCellTable">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="prpCheckAll" class="row-check"></th>
+                <th>LINE</th>
+                <th>PRP</th>
+                <th>AREA</th>
+                <th>LAYER</th>
+                <th>STEP</th>
+                <th>SKIPRULE</th>
+                <th>DESCRIPT</th>
+                <th>RECIPE</th>
+                <th><span class="th-help" data-tooltip="TIP등록 기준 / 빨간색 글자는 미등록TIP호환Path입니다.">EQPGROUP</span></th>
+                <th><span class="th-help" data-tooltip="TIP등록 기준 / 빨간색 글자는 미등록TIP호환Path입니다.">CHAM정보</span></th>
+                <th>TYPE</th>
+                <th>BODY호환</th>
+                <th>CHAM호환</th>
+                <th>BODY수</th>
+                <th>CHAM수</th>
+                <th>호환구분</th>
+                <th><span class="th-help" data-tooltip="상시 호환Path, 비상시 호환Path 선택">상시/비상시</span></th>
+                <th><span class="th-help" data-tooltip="주요Lot도 호환 가능, 비주요Lot만 호환 가능 선택">주요/비주요</span></th>
+                <th>호환계획</th>
+                <th>계획_호환EQPBODY명</th>
+                <th>계획_호환EQPCHAM명</th>
+                <th>계획_호환완료계획일</th>
+                <th>계획_평가LotID</th>
+                <th>계획_평가단계</th>
+                <th>계획_비고</th>
+                <th><span class="th-help" data-tooltip="GPM에 TIP은 등록돼있지 않지만, 실제로 호환 가능한 Path">TIP미등록 호환Path</span></th>
+                <th>미등록TIP호환Path_상시/비상시</th>
+                <th>미등록TIP호환Path_주요/비주요</th>
+                <th>미등록TIP호환Path_호환EQPBODY명</th>
+                <th>미등록TIP호환Path_호환EQPCHAM명</th>
+                <th><span class="th-help" data-tooltip="TIP등록은 되어있으나, {{ current_prevent_threshold_days }}일 이상 PREVENT 상태이면 비호환으로 간주">BODY호환_TIP고려</span></th>
+                <th><span class="th-help" data-tooltip="TIP등록은 되어있으나, {{ current_prevent_threshold_days }}일 이상 PREVENT 상태이면 비호환으로 간주">CHAM호환_TIP고려</span></th>
+                <th><span class="th-help" data-tooltip="TIP등록은 되어있으나, {{ current_prevent_threshold_days }}일 이상 PREVENT 상태이면 비호환으로 간주">BODY호환확보수_TIP고려</span></th>
+                <th><span class="th-help" data-tooltip="TIP등록은 되어있으나, {{ current_prevent_threshold_days }}일 이상 PREVENT 상태이면 비호환으로 간주">CHAM호환확보수_TIP고려</span></th>
+                <th><span class="th-help" data-tooltip="현재 PREVENT 상태 TIP List">TIP</span></th>
+                <th><span class="th-help" data-tooltip="Serial설비 Chamber 연결 정보">CHILDEQP</span></th>
+            </tr>
+        </thead>
+        <tbody id="prpDashboardTbody">
+            <tr>
+                <td colspan="37" class="empty-cell">PRP조건과 그 외 필터 조건을 최소 하나 이상 설정 후 조회하십시오.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

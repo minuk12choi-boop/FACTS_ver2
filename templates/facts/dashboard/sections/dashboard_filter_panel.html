@@ -1,0 +1,78 @@
+{# 역할: 좌측 상단 필터 패널.
+   기준일/LINE/PRP/AREA/LAYER와 체크 옵션, 요약 카드 UI를 담당합니다. #}
+<section class="card dashboard-left-panel">
+    <div class="dashboard-top-row">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <h3 class="panel-title" style="margin:0;">대시보드 필터</h3>
+            <span style="font-size:12px; color:#486888;">PRP 선택 후 조회 버튼 클릭바랍니다.</span>
+        </div>
+        {# 역할: 요약/그래프 조회 버튼. dashboard.js에서 refreshSummaryOnly와 연결됨 #}
+        <button type="button" class="btn-primary" id="dashboardSearchBtn">조회</button>
+    </div>
+
+    <div class="filter-grid dashboard-filter-grid">
+        <div>
+            <label>기준일</label>
+            <input type="date" name="snap_date" value="{{ snap_date|date:'Y-m-d' }}">
+        </div>
+        <div>
+            <label>LINE</label>
+            <select name="lineid">
+                <option value="">전체</option>
+                {% for li in filters.lineids %}
+                    <option value="{{ li }}" {% if selected_lineid == li %}selected{% endif %}>{{ li }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>PRP</label>
+            <select name="processid" class="filter-select">
+                <option value="">전체</option>
+                {% for p in filters.processes %}
+                    <option value="{{ p }}" {% if selected_processid == p %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>AREA</label>
+            <select name="areaname">
+                <option value="">전체</option>
+                {% for a in filters.areas %}
+                    <option value="{{ a }}" {% if selected_areaname == a %}selected{% endif %}>{{ a }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>LAYER</label>
+            <select name="layerid">
+                <option value="">전체</option>
+                {% for l in filters.layers %}
+                    <option value="{{ l }}" {% if selected_layerid == l %}selected{% endif %}>{{ l }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    {# 역할: 대시보드 요약 계산 조건 토글.
+       체크박스 값은 JS에서 querystring으로 다시 조립됩니다. #}
+    <div class="dashboard-check-group">
+        <label class="inline-check-label">
+            계측포함:
+            <input type="checkbox" name="include_measure" value="1" {% if include_measure %}checked{% endif %}>
+        </label>
+        <label class="inline-check-label">
+            비상시 포함:
+            <input type="checkbox" name="include_emergency" value="1" {% if include_emergency %}checked{% endif %}>
+        </label>
+        <label class="inline-check-label">
+            SKIPRULE 100 제외:
+            <input type="checkbox" name="exclude_skiprule_100" value="1" {% if exclude_skiprule_100 %}checked{% endif %}>
+        </label>
+        <label class="inline-check-label">
+            TIP 고려:
+            <input type="checkbox" name="tip_mode" value="1" {% if tip_mode %}checked{% endif %}>
+        </label>
+    </div>
+
+    {% include "facts/dashboard/sections/dashboard_summary_cards.html" %}
+</section>

@@ -1,0 +1,19 @@
+{# 역할: 사용 가이드 페이지 이미지를 넘겨보는 모달.
+   guidePrevBtn/guideNextBtn/guideCloseBtn과 JS renderGuidePage가 연결됩니다. #}
+<div id="guideModal" class="modal hidden">
+    <div class="modal-panel guide-modal-panel">
+        <div class="guide-modal-header">
+            <div class="modal-title">FACTS 사용 가이드</div>
+            <div class="toolbar-inline">
+                <button type="button" class="btn-secondary btn-sm" id="guidePrevBtn">이전</button>
+                <span id="guidePageInfo" class="guide-page-info">0 / 0</span>
+                <button type="button" class="btn-secondary btn-sm" id="guideNextBtn">다음</button>
+                <button type="button" class="btn-primary btn-sm" id="guideCloseBtn">닫기</button>
+            </div>
+        </div>
+        <div class="modal-body guide-modal-body" id="guideModalBody">
+            <div id="guideEmptyMessage" class="empty-cell">등록된 사용 가이드가 없습니다.</div>
+            <img id="guideImageViewer" class="guide-image-viewer hidden" alt="FACTS guide page">
+        </div>
+    </div>
+</div>

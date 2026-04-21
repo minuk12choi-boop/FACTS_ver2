@@ -1,0 +1,22 @@
+{# 역할: 엑셀 업로드 모달.
+   업로드 템플릿 다운로드 링크와 실제 파일 선택 input을 포함합니다. #}
+<div id="uploadModal" class="modal hidden">
+    <div class="modal-panel">
+        <div class="upload-modal-title-row">
+            <div class="modal-title">엑셀 업로드</div>
+            <a href="{% url 'facts:dashboard_upload_template' %}" class="info-icon-btn inline-help-btn" title="업로드 양식 다운로드">?</a>
+        </div>
+        <div class="modal-body">
+            <p class="upload-guide">
+                PROCESSID, STEPSEQ,
+                상시/비상시, 주요/비주요, 호환EQPBODY명, 호환EQPCHAM명, 호환완료계획일, 평가LotID, 평가단계, 비고,
+                미등록TIP호환Path_상시/비상시, 미등록TIP호환Path_주요/비주요, 미등록TIP호환Path_호환EQPBODY명, 미등록TIP호환Path_호환EQPCHAM명
+            </p>
+            <input type="file" id="bulkUploadFile" accept=".xlsx,.csv">
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="uploadCancelBtn">취소</button>
+            <button type="button" class="btn-primary" id="uploadSaveBtn">업로드</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{# 역할: TIP미등록 호환Path 목록을 보여주는 모달.
+   기존 등록값 조회/수정/삭제 진입점입니다. #}
+<div id="tipMissingListModal" class="modal hidden">
+    <div class="modal-panel">
+        <div class="modal-title">TIP미등록 호환Path 목록</div>
+        <div class="modal-body">
+            <div class="toolbar-inline" style="margin-bottom:12px;">
+                <button type="button" class="btn-primary btn-sm" id="tipMissingAddNewBtn">신규 입력</button>
+            </div>
+            <div class="table-wrap" style="max-height:280px; overflow:auto; border:1px solid #dce8f5; border-radius:12px;">
+                <table class="facts-table compact-facts-table" id="tipMissingListTable" style="min-width:900px;">
+                    <thead>
+                        <tr>
+                            <th>미등록TIP호환Path_상시/비상시</th>
+                            <th>미등록TIP호환Path_주요/비주요</th>
+                            <th>미등록TIP호환Path_호환EQPBODY명</th>
+                            <th>미등록TIP호환Path_호환EQPCHAM명</th>
+                            <th>수정</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tipMissingListTbody">
+                        <tr><td colspan="6" class="empty-cell">불러오는 중...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="tipMissingListCloseBtn">닫기</button>
+        </div>
+    </div>
+</div>
