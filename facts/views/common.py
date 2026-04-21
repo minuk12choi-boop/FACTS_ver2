@@ -196,13 +196,27 @@ def _plan_to_json(obj):
         "memo": obj.memo or "",
     }
 
+# 함수 정의: 'TIP 미등록' 객체(DB 모델 인스턴스)를 JSON(딕셔너리) 형식으로 변환하는 역할
+# 함수명 앞의 언더바(_)는 이 함수가 파일 내부에서만 주로 쓰이는 '헬퍼 함수'임을 관습적으로 나타냅니다.
 def _tip_missing_to_json(obj):
+    # 결과물을 딕셔너리(Dictionary) 형태로 반환합니다. (이후 JsonResponse 등에 사용됨)
     return {
+        # 'id' 키에 객체의 고유 번호(ID)를 할당
         "id": obj.id,
+        
+        # 'lineid'가 None(Null)일 경우 빈 문자열("")을 기본값으로 넣음 (or "" 문법)
         "lineid": obj.lineid or "",
+        
+        # 상시/비상시 구분 값을 가져오되, 없으면 빈 문자열 처리
         "always_emergency": obj.always_emergency or "",
+        
+        # 주요/비주요 변경 구분 값을 가져오되, 없으면 빈 문자열 처리
         "major_minor": obj.major_minor or "",
+        
+        # 설비 본체(Body) 명칭을 가져오되, 없으면 빈 문자열 처리
         "eqp_body_name": obj.eqp_body_name or "",
+        
+        # 설비 챔버(Chamber) 명칭을 가져오되, 없으면 빈 문자열 처리
         "eqp_cham_name": obj.eqp_cham_name or "",
     }
 
