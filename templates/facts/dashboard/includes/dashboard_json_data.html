@@ -1,0 +1,11 @@
+{# 역할: dashboard.js가 읽을 초기 데이터 주입부.
+   json_script는 안전하게 JSON을 script tag에 넣고, dashboard-meta는 편의용 직접 JSON입니다. #}
+{{ combined_series_json|json_script:"facts-combined-series-data" }}
+{{ dashboard_api_urls_json|json_script:"dashboard-api-urls" }}
+{{ guide_pages_json|json_script:"guide-pages-data" }}
+<script id="dashboard-meta" type="application/json">
+{
+    "snap_date": "{{ snap_date|date:'Y-m-d' }}",
+    "is_editable_snap_date": {{ is_editable_snap_date|yesno:"true,false" }}
+}
+</script>
